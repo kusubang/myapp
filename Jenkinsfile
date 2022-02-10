@@ -1,26 +1,28 @@
-pipeline {
-  agent any
+// pipeline {
+//   agent any
 
-  tools {nodejs "node"}
+//   tools {nodejs "node"}
 
-  stages {
-    stage("Build") {
-      steps {
-        echo "install npm package"
-        bat 'build-node.bat'
-      }
+//   stages {
+//     stage("Build") {
+//       steps {
+//         echo "install npm package"
+//         bat 'build-node.bat'
+//       }
+//     }
+//   }
+// }
+
+node {
+  stage("Stage1") {
+    checkout scm
+
+    docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
+
+        def customImage = docker.build("kusubang/nodeapp")
+
+        /* Push the container to the custom Registry */
+        customImage.push()
     }
   }
 }
-
-// node {
-//     checkout scm
-
-//     docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
-
-//         def customImage = docker.build("kusubang/nodeapp")
-
-//         /* Push the container to the custom Registry */
-//         customImage.push()
-//     }
-// }
