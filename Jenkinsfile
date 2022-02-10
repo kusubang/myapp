@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        node test.js
+        echo "xxxxx"
       }
     }
   }
