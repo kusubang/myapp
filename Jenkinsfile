@@ -7,7 +7,7 @@ pipeline {
     stage("Build") {
       steps {
         echo "install npm package"
-        sh 'build-node.bat'
+        bat 'build-node.bat'
       }
     }
   }
